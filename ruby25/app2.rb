@@ -4,7 +4,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 
 before '/visit' do
-	@options_barber = ["Option ", "Option 2", "Option 3", 'Jesi pinkman']
+	@options_barber = ["Pinkman", "Viper", "Jesi", 'Jesi pinkman']
 end
 
 get '/' do
@@ -42,7 +42,7 @@ post '/visit' do
 	@phone = params[:phone]
 	@datetime = params[:datetime]
 	@mail = params[:mail]
-	@options = params[:options]
+	@barber = params[:barber]
 	@color = params[:color]
 	@mess = ''
 	
@@ -60,18 +60,16 @@ post '/visit' do
 	# 	end
 	@error = hh.select {|key, value| params[key] == ''}.values.join(', ')
 
-	# if @error != ''
-	# 	return erb :visit
-	# end
+	if @error != ''
+		return erb :visit
+	end
 
 	
 	
 	f = File.open './public/contacts/contacts.txt', 'a'
-	f.write "Парикмахер #{@options}\n Имя: #{@username} 
-	Телефон: #{@phone} Электронная почта: #{@mail} Время приёма: #{@datetime}, 
-	#{@color}\n"
+	f.write "Парикмахер #{@barber}\n Имя: #{@username}, Телефон: #{@phone}, Электронная почта: #{@mail}, Время приёма: #{@datetime}, #{@color}\n"
 	f.close		
-	@mess = "Вв аша заявка принята"
+	@mess = "Ваша заявка принята"
 	return erb :visit
 			
 end

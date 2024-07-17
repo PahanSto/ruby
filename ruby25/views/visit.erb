@@ -29,18 +29,24 @@ $(function() {
   </div>
 
   <div class="form-group">
+    <label>Email</label>
+    <input name="mail" type="text" class="form-control" placeholder="Введите почту" value="<%= @mail %>">
+  </div>
+
+   <div class="form-group">
     <label>Когда вас ждать?</label>
     <input name="datetime" type="text" class="form-control" placeholder="Введите дату и время" value="<%= @datetime %>">
   </div>
-
-
+  
   <div class="form-group">
     <label>Ваш парикмахер:</label>
-    <select name="barber" class="form-control">
-      <option>Jessie Pinkman</option>
-      <option>Walter White</option>
-      <option>Gus Fring</option>
-    </select>
+    <p><select name="barber" >
+      <% @options_barber.each do |item| %>
+        <option><%= item %></option>
+      <% end %>  
+      
+      
+    </select></p>
   </div>
 
   <div class="form-group">
